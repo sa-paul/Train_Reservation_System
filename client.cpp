@@ -63,6 +63,12 @@
 #include <future>
 #include <initializer_list>
 #include <mutex>
+#include <iostream>
+#include <cstring>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 #include <random>
 #include <ratio>
 #include <regex>
@@ -94,9 +100,46 @@ account::~account()
 }
 
 
-int main(void){
-    // ONLY FOR TESTING 
-    string s="Complete it";
-    cout<<s;
+
+int main() {
+    int clientSocket;
+    struct sockaddr_in serverAddress;
+
+    // Create socket
+    if ((clientSocket = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+        perror("Socket creation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_port = htons(8080);
+
+    // Convert IPv4 and IPv6 addresses from text to binary form
+    if(inet_pton(AF_INET, "127.0.0.1", &serverAddress.sin_addr)<=0) {
+        perror("Invalid address/ Address not supported");
+        exit(EXIT_FAILURE);
+    }
+
+    // Connect to the server
+    if (connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0) {
+        perror("Connection failed");
+        exit(EXIT_FAILURE);
+    }
+
+    char buffer[1024] = {0};
+    char response[1024] = {0};
+
+    // Send data to server
+    strcpy(buffer, "Client: Hello, Server!");
+    send(clientSocket, buffer, strlen(buffer), 0);
+    printf("Message sent to server: %s\n", buffer);
+
+    // Receive response from server
+    read(clientSocket, response, sizeof(response));
+    printf("Server response: %s\n", response);
+
+    // Close the socket
+    close(clientSocket);
+
     return 0;
 }
