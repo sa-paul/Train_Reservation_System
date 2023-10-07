@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cctype>
 #include <cerrno>
 #include <cfloat>
@@ -13,6 +12,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <cassert>
 #include <ctime>
 #include <ccomplex>
 #include <cfenv>
@@ -82,6 +82,9 @@
 #include <unordered_set>
 using namespace std;
 
+// **************************************************************
+//  SAMPLE
+// **************************************************************
 class account
 {
 private:
@@ -100,7 +103,9 @@ account::~account()
 }
 
 
-
+// **************************************************************
+// actual code
+// **************************************************************
 int main() {
     int clientSocket;
     struct sockaddr_in serverAddress;

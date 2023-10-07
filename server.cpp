@@ -84,14 +84,21 @@
 #include <unordered_set>
 using namespace std;
 
+// **************************************************************
+// FORMAT FOR CLASSES
+// **************************************************************
 class user
 {
 private:
+    // **************************************************************
     // MEMBER DATA
+    // **************************************************************
 public:
     user(/* args */);
     ~user();
+    // **************************************************************
     // MEMBER FUNCTIONS
+    // **************************************************************
     bool create(string & mobile, string & password);
 }; 
 
@@ -106,6 +113,10 @@ user::~user()
 {
 }
 
+
+// **************************************************************
+// ACTUAL CODE
+// **************************************************************
 std::mutex mtx;
 
 class User {
@@ -150,8 +161,9 @@ public:
         std::lock_guard<std::mutex> lock(mtx);
         trains[trainNumber] = Train(trainNumber, source, destination, seats);
     }
-
+    // **************************************************************
     // Add other methods for booking, canceling tickets, etc.
+    // **************************************************************
 };
 
 void handleClient(int clientSocket, ReservationSystem& reservationSystem) {
