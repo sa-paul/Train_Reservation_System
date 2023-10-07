@@ -65,4 +65,58 @@ By leveraging these technologies, the Railway Reservation System achieves a bala
 - `Local IP address and routers`: Explains how to find the local IP address and configure routers for the server-client communication.
 
 ## How to Use
-Provide instructions on how to compile and run the server and client programs. Include any dependencies or configurations needed for successful execution.
+
+To use the Railway Reservation System, follow these steps to compile and run the server and client programs. Please ensure you have the necessary dependencies installed and configured on your system before proceeding.
+
+### Prerequisites
+
+1. **C++ Compiler:** Ensure you have a C++ compiler installed on your system. If you're using Linux, you can use `g++`. On Windows, you can use MinGW or Visual Studio.
+
+### Compilation
+
+#### Server Program (`server.cpp`)
+
+Compile the server program using the following command:
+
+```bash
+g++ -o server server.cpp -lpthread
+```
+
+This command compiles `server.cpp` and creates an executable named `server`.
+
+#### Client Program (`client.cpp`)
+
+Compile the client program using the following command:
+
+```bash
+g++ -o client client.cpp
+```
+
+This command compiles `client.cpp` and creates an executable named `client`.
+
+### Running the Server
+
+Run the server program with the following command:
+
+```bash
+./server
+```
+
+The server will start listening for incoming connections on port `8080`.
+
+### Running the Client
+
+Run the client program with the following command:
+
+```bash
+./client
+```
+
+The client will attempt to connect to the server at `127.0.0.1:8080`. Ensure the server is running before starting the client.
+
+### Note:
+
+- **Port Number:** The server is configured to listen on port `8080`. If you need to change the port number, modify the `server.cpp` file and recompile the server program.
+- **IP Address:** Both server and client are set to communicate on the localhost (`127.0.0.1`). If the server is hosted on a different machine, modify the IP address in the `client.cpp` file to match the server's IP address.
+
+Make sure to handle any firewall or network configurations to allow communication between the server and client if they are running on different machines.
